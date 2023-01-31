@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/employees">Homepage</a></li>
+            <li><a href="/create">Add employee</a></li>
+        </ul>
+    </nav>
+
+    <h1>Detail Information about this Employees</h1>
+    <div>
+    <h2> <%= employee.name %> </h2>
+    <h3> <%= employee.role %> </h3>
+    <h3> <%= employee.age %> </h3>
+    <a class='del' data-item='<%= employee._id%>'><button>Delete</button></a>
+</div>
+
+<script>
+ const remove = document.querySelector('.del')
+ console.log(remove)
+ remove.addEventListener('click', () =>{
+    const url = `/employees/${remove.dataset.item}`
+    fetch(url, {
+        method: 'DELETE'
+    }).then((response) => response.json())
+    .then((data) => {
+      window.location.href = data.redirect
+    })
+    .catch((error) => console.log(err))
+ })
+</script>
+</body>
+</html>
